@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Java语言学习 | dwjBlog</title>
+  <meta name="keywords" content=" java ">
+  <meta name="description" content="Java语言学习 | dwjBlog">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="链表">
+<meta property="og:url" content="http://example.com/2022/07/05/%E9%93%BE%E8%A1%A8/index.html">
+<meta property="og:site_name" content="dwjBlog">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-07-05T08:09:26.000Z">
+<meta property="article:modified_time" content="2022-07-05T08:10:48.742Z">
+<meta property="article:author" content="杜文杰">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/github.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>杜文杰</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="rss"
+               href="/atom.xml"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-rss"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="github"
+               href="https://github.com/du2554163051"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+    
+        
+            <a title="reddit"
+               href="https://www.reddit.com/user/yelog/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-reddit"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="weibo"
+               href="http://weibo.com/u/2307534817"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-weibo"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="oschina"
+               href="https://my.oschina.net/yelog"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-oschina"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+            <a title="email"
+               href="mailto:2554163051@qq.com"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-email"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="qq"
+               href="http://wpa.qq.com/msgrd?v=3&uin=2554163051&site=qq&menu=yes"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-qq"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="kugou"
+               href="https://www.kugou.com/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-kugou"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="neteasemusic"
+               href="https://music.163.com/#/user/home?id=88151013"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-neteasemusic"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="All">All
+            
+                <small>(5)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                <li>
+                    <div data-rel="算法">
+                        
+                        算法
+                        <small>(1)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="后端">
+                        
+                        后端
+                        <small>(3)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">About</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">Friends</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="5">
+<input type="hidden" id="yelog_site_word_count" value="7.2k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        Links
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">All</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>java</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>spring5</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>SSM</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>后端</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>开始</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>算法</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="All "
+           href="/2022/07/05/%E9%93%BE%E8%A1%A8/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="链表">链表</span>
+            <span class="post-date" title="2022-07-05 16:09:26">2022/07/05</span>
+        </a>
+        
+        
+        <a  class="All 后端 "
+           href="/2022/07/05/Spring5/"
+           data-tag="后端,spring5,SSM"
+           data-author="" >
+            <span class="post-title" title="Spring5">Spring5</span>
+            <span class="post-date" title="2022-07-05 16:06:32">2022/07/05</span>
+        </a>
+        
+        
+        <a  class="All 算法 "
+           href="/2022/07/05/%E7%AE%97%E6%B3%95/"
+           data-tag="算法"
+           data-author="" >
+            <span class="post-title" title="数组">数组</span>
+            <span class="post-date" title="2022-07-05 14:47:21">2022/07/05</span>
+        </a>
+        
+        
+        <a  class="All 后端 "
+           href="/2022/07/05/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/"
+           data-tag="开始"
+           data-author="" >
+            <span class="post-title" title="我的第一篇博客">我的第一篇博客</span>
+            <span class="post-date" title="2022-07-05 14:23:41">2022/07/05</span>
+        </a>
+        
+        
+        <a  class="All 后端 "
+           href="/2022/03/07/Java%E5%AD%A6%E4%B9%A0/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="Java语言学习">Java语言学习</span>
+            <span class="post-date" title="2022-03-07 10:19:54">2022/03/07</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-Java学习" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">Java语言学习</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="后端">后端</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color5">java</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            Created At : <time class="date" title='Updated At: 2022-07-12 08:54:08'>2022-03-07 10:19</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>Count:3.1k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            Views 👀 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95"><span class="toc-text">语法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E5%8F%98%E9%87%8F"><span class="toc-text">1、变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2"><span class="toc-text">2、数据转换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1"><span class="toc-text">面向对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B"><span class="toc-text">多线程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E5%92%8C%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-text">类和常用方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81Object%E7%B1%BB"><span class="toc-text">1、Object类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81String%E7%B1%BB"><span class="toc-text">2、String类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E7%82%B9"><span class="toc-text">特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95"><span class="toc-text">方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81StringBuffer%E7%B1%BB"><span class="toc-text">3、StringBuffer类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E7%82%B9-1"><span class="toc-text">特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95-1"><span class="toc-text">方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81Date%E7%B1%BB"><span class="toc-text">4、Date类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E7%82%B9-2"><span class="toc-text">特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95-2"><span class="toc-text">方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="toc-text">日期格式的转换</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5%E3%80%81%E5%8C%85%E8%A3%85%E7%B1%BB"><span class="toc-text">5、包装类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E7%82%B9-3"><span class="toc-text">特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95-3"><span class="toc-text">方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6%E3%80%81BigDecimal%E7%B1%BB%E5%92%8CBigInteger%E7%B1%BB"><span class="toc-text">6、BigDecimal类和BigInteger类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E7%82%B9-4"><span class="toc-text">特点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7%E3%80%81Random%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%B1%BB"><span class="toc-text">7、Random随机数类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E7%82%B9-5"><span class="toc-text">特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95-4"><span class="toc-text">方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Calendar%E6%97%A5%E5%8E%86%E7%B1%BB"><span class="toc-text">Calendar日历类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E7%82%B9-6"><span class="toc-text">特点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Collection%E6%8E%A5%E5%8F%A3"><span class="toc-text">Collection接口</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95-5"><span class="toc-text">方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#List%E6%8E%A5%E5%8F%A3"><span class="toc-text">List接口</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E7%82%B9-7"><span class="toc-text">特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95-6"><span class="toc-text">方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ArrayList%E7%B1%BB"><span class="toc-text">ArrayList类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E7%82%B9-8"><span class="toc-text">特点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LinkedList%E7%B1%BB"><span class="toc-text">LinkedList类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E7%82%B9-9"><span class="toc-text">特点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vector%E7%B1%BB"><span class="toc-text">Vector类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E7%82%B9-10"><span class="toc-text">特点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Stack%E7%B1%BB"><span class="toc-text">Stack类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E7%82%B9-11"><span class="toc-text">特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95-7"><span class="toc-text">方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Set%E6%8E%A5%E5%8F%A3"><span class="toc-text">Set接口</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E7%82%B9-12"><span class="toc-text">特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95-8"><span class="toc-text">方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HashSet%E7%B1%BB"><span class="toc-text">HashSet类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E7%82%B9-13"><span class="toc-text">特点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HashMap%E7%B1%BB"><span class="toc-text">HashMap类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E7%82%B9-14"><span class="toc-text">特点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8B"><span class="toc-text">泛型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84"><span class="toc-text">反射</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-6 i,
+    .toc-level-6 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><h3 id="1、变量"><a href="#1、变量" class="headerlink" title="1、变量"></a>1、变量</h3><ul>
+<li><p>整数类型</p>
+<p>byte：占用1字节(8个bit位) 范围为 -128-127</p>
+<p>short：占用2字节，范围为 -2<sup>15</sup>-2<sup>15</sup>-1</p>
+<p>int：4个字节，范围为-2<sup>31</sup>-2<sup>31</sup>-1</p>
+<p>long：8字节，范围为-2<sup>63</sup>-2<sup>63</sup>-1</p>
+</li>
+<li><p>浮点类型</p>
+</li>
+<li><p>字符类型</p>
+</li>
+<li><p>布尔类型</p>
+</li>
+<li><p>字符串类型</p>
+</li>
+</ul>
+<h3 id="2、数据转换"><a href="#2、数据转换" class="headerlink" title="2、数据转换"></a>2、数据转换</h3><h2 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h2><h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h2><h2 id="类和常用方法"><a href="#类和常用方法" class="headerlink" title="类和常用方法"></a>类和常用方法</h2><h3 id="1、Object类"><a href="#1、Object类" class="headerlink" title="1、Object类"></a>1、Object类</h3><ul>
+<li><p>Object类是所有类的顶级父类，是所有类的根，所有类都直接或间接继承Object类</p>
+</li>
+<li><p><code>(String) toString()</code>：使用<code>System.out.println()</code>打印对象时，调用该方法返回对象的地址。子类可以重写此方法实现输出其他的值。</p>
+</li>
+<li><p><code>(boolean) equals(Object obj)</code>：比较两个引用是否指向同一个对象，也就是两个引用的地址是否相同；如果比较基本数据类型类型，则比较值是否相同。如果想要比较两个对象的内容是否相同，需要重写equals方法</p>
+</li>
+<li><p><code>(Object) clone()</code>：它实现对象中各个属性的复制，但它的可见范围是<code>protected</code>的，所以实体类使用克隆的前提是：</p>
+<ul>
+<li>实现<code>Cloneable</code>接口，这是一个标记接口，自身没有方法。 </li>
+<li>覆盖<code>clone()</code>方法，可见性提升为<code>public</code></li>
+<li>深克隆与浅克隆<ul>
+<li>浅克隆：被复制对象的所有值属性都含有与原来对象的相同，而所有的对象引用属性仍然指向原来的对象。</li>
+<li>深克隆：在浅拷贝的基础上，所有引用其他对象的变量也进行了<code>clone</code>，并指向被复制过的新对象</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>(int) hashCode()</code>：获取对象的哈希值，此哈希值为对象涉及集合操作时提供参考，也可以将这个哈希值理解为地址值</p>
+</li>
+</ul>
+<h3 id="2、String类"><a href="#2、String类" class="headerlink" title="2、String类"></a>2、String类</h3><h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><ul>
+<li><p>被final修饰，不能被继承</p>
+</li>
+<li><p>不可变对象，每次对字符串的修改都会生成新的字符串对象</p>
+</li>
+<li><p>内部维护了一个<code>char</code>数组，用于存储数据</p>
+</li>
+<li><p>内部维护了一个字符串常量池，可以直接使用字面量来创建对象，字面量创建的对象都会缓存到常量池中，以达到复用的效果。如果创建时使用<code>new</code>关键字赋值时，创建的字符则不会缓存到常量池，每次都会重新创建一次</p>
+<pre><code class="java">String s1 = &quot;hello&quot;+&quot;world&quot;;
+String s2 = &quot;hello&quot;;
+String s3 = s2 + &quot;world&quot;;
+// 字符串在使用 “+” 做拼接时，如果两边都是字面量，编译优化结果仍然放在常量池，如果“+”两边有变量参与，会创建新的字符串对象，放在堆空间中
+System.out.println(s1 == s3) //false
+</code></pre>
+</li>
+</ul>
+<h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><ul>
+<li><code>toUpperCase()</code> ：将字符串转为大写并返回</li>
+<li><code>toLowerCase()</code> ：将字符串转为小写并返回</li>
+<li><code>endsWith(String x)</code> ：是否以x结尾，返回值为boolean</li>
+<li><code>startsWith(int start)</code> ：是否以start开始，返回值为boolean</li>
+<li><code>charAt(x)</code> ：         获取指定位置x的字符，返回值为char</li>
+<li><code>indexOf(x)</code> ：       正向获取指定字符串x在原字符串中的位置，如果没找到返回-1，返回值为int</li>
+<li><code>lastIndexOf(x)</code> :  反向获取指定字符串x在原字符串中的位置，如果没找到返回-1   返回值为int</li>
+<li><code>split(x)</code> :               根据指定的正则表达式x来拆分字符串，返回值为String[]</li>
+<li><code>substring(x,y)</code>：  截取字符串中从x到y的字符串</li>
+<li><code>replace(x,y)</code> :       使用y字符串替换x字符串</li>
+<li><code>replaceAll()</code> :       使用正则表达式匹配替换字符串</li>
+<li><code>trim()</code>：                     去掉字符串两端的空格</li>
+<li><code>concat()</code> ：              字符串拼接</li>
+<li><code>contains()</code> ：          是否包含子字符串，返回值boolean</li>
+<li><code>equalsIgnoreCase()</code> ：   忽略大小写比较，返回值boolean</li>
+</ul>
+<h3 id="3、StringBuffer类"><a href="#3、StringBuffer类" class="headerlink" title="3、StringBuffer类"></a>3、StringBuffer类</h3><h4 id="特点-1"><a href="#特点-1" class="headerlink" title="特点"></a>特点</h4><ul>
+<li>可变字符串，StringBuffer&amp;&amp;StringBuider</li>
+<li>StringBuffer是可变字符串类型，对其操作不会产生新的字符串对象，操作的都是其本身</li>
+<li>StringBuffer内部维护着char数组，默认长度是16，有自动扩容的机制，当容量不够时，会自动扩容，最大能扩容到Integer.MAX_VALUE-8</li>
+<li>StringBuffer没有重写equals方法</li>
+<li>StringBuffer是早期的实现，是线程安全的。StringBuilder是后期的实现，线程不安全</li>
+<li>当涉及字符串的频繁修改时，应当选择StringBuffer提升效率</li>
+</ul>
+<h4 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h4><ul>
+<li><p><code>append()</code>: 追加字符串操作</p>
+<pre><code class="java">String s = null;
+String s1 = null;
+System.out.println(s+s1)//&quot;nullnull&quot;
+
+/**
+* +运算中在做字符串拼接时，如果有变量参与
+* 1.创建一个StringBuffer对象
+*/
+</code></pre>
+</li>
+<li><p><code>insert(int index,String x)</code> :  向指定位置index添加字符串x</p>
+</li>
+<li><p><code>delete(int start,int end)</code> :   删除指定区间start-end的字符串</p>
+</li>
+<li><p><code>replace(int start,int end,String x)</code> :  将指定区间start-end的字符串替换成x</p>
+</li>
+</ul>
+<h3 id="4、Date类"><a href="#4、Date类" class="headerlink" title="4、Date类"></a>4、Date类</h3><h4 id="特点-2"><a href="#特点-2" class="headerlink" title="特点"></a>特点</h4><ul>
+<li><p>Date代表日期类，它封装了一个时间毫秒值</p>
+</li>
+<li><p>1970-01-01 00:00:00 计算机的元年</p>
+</li>
+<li><pre><code class="java">Date date = new Date(); // 代表当前时间
+date = new Date(100L); //计算机元年加100毫秒
+</code></pre>
+</li>
+</ul>
+<h4 id="方法-2"><a href="#方法-2" class="headerlink" title="方法"></a>方法</h4><ul>
+<li><code>getTime()</code>: 获取Date代表时间的毫秒值</li>
+<li><code>setTime()</code>: 设置Date代表时间的毫秒值</li>
+</ul>
+<h4 id="日期格式的转换"><a href="#日期格式的转换" class="headerlink" title="日期格式的转换"></a>日期格式的转换</h4><ul>
+<li><p>DateFormat &gt;&gt;  SimpleDateFormat</p>
+</li>
+<li><p><code>(String) format(Date date)</code> : 将日期对象转换为指定格式的字符串</p>
+</li>
+<li><p><code>(Date) parse(String str)</code> :  将字符串数据转为日期对象</p>
+</li>
+<li><pre><code class="java">Date date = new Date();
+
+SimpleDateFormate sdf = new SimpleDateFarmate(&quot;yyyy-MM-dd HH:mm:ss&quot;);
+String format = sdf.format(date);//将日期对象转换为指定格式的字符串
+
+String str = &quot;2020-02-20 02:20;20&quot;;
+date = sdf.parse(str);//将字符串数据转为日期对象
+</code></pre>
+</li>
+</ul>
+<h3 id="5、包装类"><a href="#5、包装类" class="headerlink" title="5、包装类"></a>5、包装类</h3><h4 id="特点-3"><a href="#特点-3" class="headerlink" title="特点"></a>特点</h4><ul>
+<li>包装类是对基本数据类型的包装，使其具备了面向对象的特征，他们都有一个共同的父类Number，提供了将包装类型数据转化为基本数据类型。</li>
+<li>自动装箱：将字面量值直接赋值给引用数据类型的包装类：其内部是通过调用valueOf()方法完成的</li>
+</ul>
+<h4 id="方法-3"><a href="#方法-3" class="headerlink" title="方法"></a>方法</h4><ul>
+<li><code>valueOf()</code> : <ul>
+<li>将字符串转化为Integer</li>
+<li>自动装箱</li>
+</ul>
+</li>
+</ul>
+<h3 id="6、BigDecimal类和BigInteger类"><a href="#6、BigDecimal类和BigInteger类" class="headerlink" title="6、BigDecimal类和BigInteger类"></a>6、BigDecimal类和BigInteger类</h3><h4 id="特点-4"><a href="#特点-4" class="headerlink" title="特点"></a>特点</h4><ul>
+<li>double运算时会有不精确的结果，这时可以使用BigDecimal解决</li>
+<li>BigInteger是用做长整数运算</li>
+<li>使用BigDecimal时，实例化对象时传的参数应为字符串类型才能计算准确</li>
+</ul>
+<h3 id="7、Random随机数类"><a href="#7、Random随机数类" class="headerlink" title="7、Random随机数类"></a>7、Random随机数类</h3><h4 id="特点-5"><a href="#特点-5" class="headerlink" title="特点"></a>特点</h4><ul>
+<li>Random类中实现的随机算法是伪随机，也就是有规则的随机。在进行随机时，随机算法的起源数字称为种子数(seed)，在种子数的基础上进行一定的变换，从而产生需要的随机数字</li>
+</ul>
+<h4 id="方法-4"><a href="#方法-4" class="headerlink" title="方法"></a>方法</h4><ul>
+<li><code>public boolean nextBoolean()</code> : 该方法的作用是生成一个随机的boolean值，生成true和false的值几率相等，也就是都是50%的几率</li>
+<li><code>public double nextDouble()</code> : 该方法的作用是生成一个随机的double值，数值介于[0,1.0)之间</li>
+<li><code>public int nextInt()</code> : 该方法的作用是生成一个随机的int值，该值介于int的区间，也就是-231到231-1之间</li>
+<li><code>public int nextInt(int n)</code> : 该方法的作用是生成一个随机的int值，该值介于[0,n)的区间，也就是0到n之间的随机int值</li>
+<li><code>public void setSeed(long seed)</code>  : 该方法的作用是重新设置Random对象中的种子数。设置完种子数以后的Random对象和相同种子数使用new关键字创建出的Random对象相同</li>
+</ul>
+<h3 id="Calendar日历类"><a href="#Calendar日历类" class="headerlink" title="Calendar日历类"></a>Calendar日历类</h3><h4 id="特点-6"><a href="#特点-6" class="headerlink" title="特点"></a>特点</h4><ul>
+<li>封装了日历数据，比Date封装信息更丰富</li>
+<li>日历类默认实现为格里高利历</li>
+<li>由于本类为抽象类，实例化时只能调用静态方法getInstance()创建对象</li>
+</ul>
+<h3 id="Collection接口"><a href="#Collection接口" class="headerlink" title="Collection接口"></a>Collection接口</h3><ul>
+<li>代表所有集合的顶级父接口，定义了集合中常见的操作方法</li>
+<li>他是所有集合的根，分别有List(有序集)、Set(无序集)、Queue(队列)三类实现</li>
+<li>集合可以看成存储数据的容器，他可以存储不同数据类型的值，但在实际应用中通常只存储一种数据类型的数据</li>
+</ul>
+<h4 id="方法-5"><a href="#方法-5" class="headerlink" title="方法"></a>方法</h4><ul>
+<li><code>public boolean add()</code> : 添加元素</li>
+<li><code>public boolean addAll()</code> : 集合合并</li>
+<li><code>public boolean remove()</code> : 删除元素</li>
+<li><code>public boolean removeAll()</code> : 根据子集来删除</li>
+<li><code>public boolean contains()</code> : 是否包含指定元素</li>
+<li><code>public boolean containsAll()</code> : 是否包含指定子集合</li>
+<li><code>public int size()</code> : 查看集合的大小</li>
+<li><code>public boolean isEmpty()</code> : 是否是一个空集合</li>
+<li><code>public void clear()</code> : 清空集合</li>
+</ul>
+<h3 id="List接口"><a href="#List接口" class="headerlink" title="List接口"></a>List接口</h3><h4 id="特点-7"><a href="#特点-7" class="headerlink" title="特点"></a>特点</h4><ul>
+<li>List集合是Collection的子接口，具备Collection定义的常用操作</li>
+<li>List代表有序集，元素是有序的(存取顺序)</li>
+<li>可以通过下标来随机访问元素，下标从0开始到size-1结束，使用下标访问元素时必须是合理的下标，否则会抛出IndexOutOfBoundsException</li>
+<li>允许重复元素存在</li>
+<li>List是一种线性顺序的数据结构</li>
+</ul>
+<h4 id="方法-6"><a href="#方法-6" class="headerlink" title="方法"></a>方法</h4><ul>
+<li>由于List接口是Collection的子接口，以下只介绍List独有的方法和重载的方法</li>
+<li><code>T get(int index)</code> : 获取对应位置index的数据，用法与数组相似，从零开始计数</li>
+<li><code>void add(int index,T,element)</code> : 在指定位置index添加数据element，并且从index开始的所有元素以此后移</li>
+<li><code>T set(int index,T element)</code> : 在指定位置index的数据替换为element</li>
+</ul>
+<h3 id="ArrayList类"><a href="#ArrayList类" class="headerlink" title="ArrayList类"></a>ArrayList类</h3><h4 id="特点-8"><a href="#特点-8" class="headerlink" title="特点"></a>特点</h4><ul>
+<li>ArrayList是List接口的具体实现类，数组实现</li>
+<li>底层维护着一个Object类型数组，用于存储数据，数组默认长度为10</li>
+<li>这个数组有自己的扩容机制，当容量不够时，自动扩容为原来的1.5倍，最大能扩容到Integer.MAX_VALUE</li>
+<li>ArrayList是List接口的后期的实现，非线程安全的，可以通过Collections辅助工具转为线程安全的集合</li>
+<li>可以调用有参构造为ArrayList指定初始容量</li>
+<li>因为是数组实现，查询效率高、增删元素效率低</li>
+</ul>
+<h3 id="LinkedList类"><a href="#LinkedList类" class="headerlink" title="LinkedList类"></a>LinkedList类</h3><h4 id="特点-9"><a href="#特点-9" class="headerlink" title="特点"></a>特点</h4><ul>
+<li>LinkedList  是List接口的实现类</li>
+<li>底层是链表实现，而且是双向链表，内部也维护着一个下标</li>
+<li>因为是链表实现，查询效率低、增删元素效率高，查询头尾节点效率高</li>
+<li>LinkedList还实现了Queue接口，也可以将LinkedList当成队列来使用</li>
+<li>LinkedList也是非线程安全的实现</li>
+<li>LinkedList在存储元素时，会将元素转为一个节点，节点包含以下3个部分</li>
+<li>第一部分(pre): 上一个节点的引用</li>
+<li>第二部分(E): 元素本身</li>
+<li>第三部分(next): 下一个节点的引用</li>
+<li>链表中只有一个数据时，这个数据既是头节点也是尾节点</li>
+</ul>
+<h3 id="Vector类"><a href="#Vector类" class="headerlink" title="Vector类"></a>Vector类</h3><h4 id="特点-10"><a href="#特点-10" class="headerlink" title="特点"></a>特点</h4><ul>
+<li>Vector是List接口的实现类</li>
+<li>底层也是数组实现，数组的默认长度是10，有自己的扩容机制，如果没有指定增量那么将扩容为原容量的2倍。如果指定了容量则扩容为原容量+增量</li>
+<li>Vector是List的早期实现类，是线程安全的实现，故效率较低</li>
+</ul>
+<h3 id="Stack类"><a href="#Stack类" class="headerlink" title="Stack类"></a>Stack类</h3><h4 id="特点-11"><a href="#特点-11" class="headerlink" title="特点"></a>特点</h4><ul>
+<li>是Vector类的子类，内部也是数组实现</li>
+<li>栈是一种先进后出的数据结构</li>
+<li>压栈：将元素压入栈顶</li>
+<li>栈顶：栈中最后一个添加的元素</li>
+<li>弹栈：获取栈顶元素，并删除</li>
+<li>栈底：栈中最先添加的yuans</li>
+</ul>
+<h4 id="方法-7"><a href="#方法-7" class="headerlink" title="方法"></a>方法</h4><ul>
+<li><code>public E push(E item)</code> : 把项压入堆栈顶部</li>
+<li><code>public E pop()</code> : 移除堆栈顶部的对象，并作为此函数的值返回该对象。</li>
+<li><code>public E peek() </code> : 查看堆栈顶部的对象，但不从堆栈中移除它</li>
+<li><code>public  int search(Object o)</code> : 返回对象在堆栈中的位置，以 1 为基数</li>
+<li><code>public boolean empty()</code> : 测试堆栈是否为空</li>
+</ul>
+<h3 id="Set接口"><a href="#Set接口" class="headerlink" title="Set接口"></a>Set接口</h3><h4 id="特点-12"><a href="#特点-12" class="headerlink" title="特点"></a>特点</h4><ul>
+<li>Set集合不允许包含相同的元素，如果试图把两个相同元素加入同一个Set集合中，则添加操作失败，add()方法返回false，且新元素不会被加入。</li>
+<li>元素无序(存储顺序)</li>
+<li>没有下标，不能通过下标操作</li>
+</ul>
+<h4 id="方法-8"><a href="#方法-8" class="headerlink" title="方法"></a>方法</h4><ul>
+<li><code>add</code></li>
+<li><code>remove</code></li>
+<li><code>contains</code></li>
+</ul>
+<h3 id="HashSet类"><a href="#HashSet类" class="headerlink" title="HashSet类"></a>HashSet类</h3><h4 id="特点-13"><a href="#特点-13" class="headerlink" title="特点"></a>特点</h4><ul>
+<li>Set接口的实现类，底层采用hash算法来存储数据</li>
+<li>HashSet实质上是一个没有value值的HashMap</li>
+</ul>
+<h3 id="HashMap类"><a href="#HashMap类" class="headerlink" title="HashMap类"></a>HashMap类</h3><h4 id="特点-14"><a href="#特点-14" class="headerlink" title="特点"></a>特点</h4><ul>
+<li>采用数组+链表的形式来存储数据，数组的默认长度是16</li>
+<li>在存储元素时，先根据元素的hashCode值计算元素在数组中存放的位置<ul>
+<li>如果这个位置没有元素，直接存储</li>
+<li>如果有元素，依次与该位置上现有元素equals比较<ul>
+<li>如果equals为true的情况，则替换原有的值</li>
+<li>如果equals为false的情况，以链表形式存储</li>
+</ul>
+</li>
+</ul>
+</li>
+<li></li>
+</ul>
+<h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h2><h2 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h2>
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 2554163051@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">💰</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2016-2020 Yelog
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>Help us with donation</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">alipay</label></span><span><label><input type="radio" name="pay" value="weixin">weixin</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+    #post .pjax article :not(pre) > code {
+        color: #24292e;
+        font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+        background-color: rgba(27,31,35,.05);
+        border-radius: 3px;
+        font-size: 85%;
+        margin: 0;
+        padding: .2em .4em;
+    }
+    
+</style>
+
+
+
+
+
+
+
+</html>
